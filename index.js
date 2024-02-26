@@ -226,22 +226,13 @@ mongoose
 
   // Function to run the Python script
   function runPythonScript() {
-    const sensor = spawn('python', ['main.py']);
-      sensor.on('close', (code) => {
-        if (code === 0) {
           const jsonData = fs.readFileSync('occupancy_data.json', 'utf8');
-    
           // Parse JSON data
           const parsedData = JSON.parse(jsonData);
-    
           // Call a function to save the data to MongoDB
           saveDataToMongoDB(parsedData);
-        } 
-        else {
-          console.error('Python script failed with code', code);
-        }
-      }
-    );
+
+  
   }
   
   // Run the Python script initially
